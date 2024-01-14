@@ -12,12 +12,50 @@ body {
   text-align: center;
 }
 
+.navbar {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100vw;
+  width: 100%;;
+}
+
+.navbar-image {
+  display: flex;
+  flex-direction: row;
+}
+
+.signin-button {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 2rem;
+  padding: 0px 16px;
+  height: 58px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .head {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.mainbody {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .title {
