@@ -1,27 +1,70 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+body {
+  margin: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.main {
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.head {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-size: 4rem;
+}
+
+.subtitle {
+  font-size: 2rem;
+}
+
+.orange {
+  color: #F46904;
+}
+
+.footer {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  height: 32px;
+  width: 100%;
+  font-size: 1rem;
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 2rem;
+  }
+  .subtitle {
+    font-size: 1.1rem;
+  }
+  .footer {
+    font-size: .7rem;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: rgb(255, 255, 255);
+    background: rgb(12, 12, 12);
+  }
+  .footer {
+    border-color: #222;
+  }
 }
