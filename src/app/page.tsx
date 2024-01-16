@@ -1,12 +1,14 @@
+"use client"
+
 import Image from 'next/image'
-import Link from 'next/link'
+import { signIn } from "next-auth/react"
 
 export default function Home() {
   return (
     <>
       <nav className="navbar">
         <Image className='navbar-image' src="https://images.static.dragonaere.com/logos/transparent/orange.png" alt={'test'} width={64} height={64} />
-        <Link className='signin-button' href='https://discord.com/api/oauth2/authorize?client_id=931671325737635840&response_type=code&redirect_uri=https%3A%2F%2Fdiscordbotapi.dragonaere.com%2F&scope=identify+email+applications.commands.permissions.update+guilds'>DO NOT USE</Link>
+        <button className='signin-button' onClick={() => signIn("Discord")}>DO NOT USE</button>
       </nav>
       <main className="main">
         <div className="content">
