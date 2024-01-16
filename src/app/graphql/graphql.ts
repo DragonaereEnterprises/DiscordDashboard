@@ -19,6 +19,7 @@ export type Scalars = {
 export type BotStats = {
   __typename?: 'BotStats';
   channelCount?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
   serverCount?: Maybe<Scalars['String']['output']>;
   userCount?: Maybe<Scalars['String']['output']>;
 };
@@ -31,7 +32,7 @@ export type Query = {
 export type GetBotStatsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetBotStatsQuery = { __typename?: 'Query', botstats?: Array<{ __typename?: 'BotStats', serverCount?: string | null, channelCount?: string | null, userCount?: string | null } | null> | null };
+export type GetBotStatsQuery = { __typename?: 'Query', botstats?: Array<{ __typename?: 'BotStats', id?: string | null, serverCount?: string | null, channelCount?: string | null, userCount?: string | null } | null> | null };
 
 
-export const GetBotStatsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getBotStats"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"botstats"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"serverCount"}},{"kind":"Field","name":{"kind":"Name","value":"channelCount"}},{"kind":"Field","name":{"kind":"Name","value":"userCount"}}]}}]}}]} as unknown as DocumentNode<GetBotStatsQuery, GetBotStatsQueryVariables>;
+export const GetBotStatsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getBotStats"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"botstats"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"serverCount"}},{"kind":"Field","name":{"kind":"Name","value":"channelCount"}},{"kind":"Field","name":{"kind":"Name","value":"userCount"}}]}}]}}]} as unknown as DocumentNode<GetBotStatsQuery, GetBotStatsQueryVariables>;

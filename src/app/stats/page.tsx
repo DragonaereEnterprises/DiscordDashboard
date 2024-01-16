@@ -11,6 +11,7 @@ export const dynamic = "force-dynamic";
 const query = gql(`
   query getBotStats {
     botstats {
+      id
       serverCount
       channelCount
       userCount
@@ -39,13 +40,16 @@ export default function Stats() {
           </div>
           <div className="mainbody">
             <div className='subtitle'>
-              {data && data.botstats!.map(data => (
-                <>
-                  <p>Server Count: {data!.serverCount}</p>
-                  <p>Channel Count: {data!.channelCount}</p>
-                  <p>User Count: {data!.userCount}</p>
-                </>
-              ))}
+              {data.botstats!.map(data => {
+                
+                return (
+                  <div key={data!.id}>
+                    <p>Server Count: {data!.serverCount}</p>
+                    <p>Channel Count: {data!.channelCount}</p>
+                    <p>User Count: {data!.userCount}</p>
+                  </div>
+                )
+              })}
             </div>
           </div>
         </div>
