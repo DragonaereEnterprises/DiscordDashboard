@@ -3,11 +3,12 @@ import NextAuth from "next-auth"
 declare module "next-auth" {
   interface Session {
     user: {
-      image: string
       id: string
+      image: string
       name: string
       global_name: string
       access_tokens: string
+      email: string
     }
     account: {
     }
@@ -19,7 +20,10 @@ declare module "next-auth" {
   }
 
   interface User {
+    image: string
     id: string
-    display_name: string
+    name: string
+    global_name: string
+    access_tokens: string
   }
 }

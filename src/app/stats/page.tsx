@@ -42,7 +42,6 @@ export default async function Stats() {
           <div className="mainbody">
             <div className='subtitle'>
               {data.botstats!.map(data => {
-                
                 return (
                   <div key={data!.id}>
                     <p>Server Count: {data!.serverCount}</p>

@@ -1,9 +1,16 @@
 import type { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next"
+import type { Adapter } from "next-auth/adapters";
 import { getServerSession } from "next-auth"
 
 import Discord from "next-auth/providers/discord"
 import type { NextAuthOptions } from "next-auth";
 import { fetchGuildsWithPerms } from "./fetchGuildsWithPerms";
+
+import { PrismaAdapter } from "@auth/prisma-adapter"
+import { PrismaClient } from "@prisma/client"
+
+const prisma = new PrismaClient()
+
 
 // Still want to add a way to save user info if possible... But maybe don't for security purposes :KEKW:
 
@@ -19,45 +26,38 @@ const providers = [
 ]
 
 export const authOptions = {
+  adapter: PrismaAdapter(prisma) as Adapter,
   session: {
-    strategy: 'jwt',
-  },
-  pages: {
-    signIn: '/',
-    signOut: '/auth/signout',
-    error: '/auth/error',
-    verifyRequest: '/auth/verify-request',
-    newUser: '/auth/new-user'
+    strategy: 'database',
   },
   providers,
   callbacks: {
-    async jwt({ token, user, profile, account }) {
-      if(user){
-        token.id = user.id
-      }
-      if (account) {
-        token.accessToken = account.access_token;
-        token.tokenType = account.token_type;
-        token.global_name = account.global_name
-      }
-      if (profile) {
-        token.profile = profile;
-        token.global_name = profile.global_name
-      }
-      // token.guilds = fetchGuildsWithPerms(account?.access_token?)
-      return token
-    },
-    session({ session, token }) {
-      return { ...session,
-        user: { ...session.user,
-          id: token.id,
-          global_name: token.global_name,
-          accessToken: token.access_token,
-          tokenType: token.tokenType,
-          discordUser: token.profile
-        }
-      }
-    },
+    // async jwt({ token, user, profile, account }) {
+    //   if(user){
+    //     token.id = user.id
+    //   }
+    //   if (account) {
+    //     token.accessToken = account.access_token;
+    //     token.tokenType = account.token_type;
+    //     token.global_name = account.global_name
+    //   }
+    //   if (profile) {
+    //     token.profile = profile;
+    //     token.global_name = profile.global_name
+    //   }
+    //   // token.guilds = fetchGuildsWithPerms(account?.access_token?)
+    //   return token
+    // },
+    // session({ session, token }) {
+    //   return { ...session,
+    //     user: { ...session.user,
+    //       id: token.id,
+    //       global_name: token.global_name,
+    //       tokenType: token.tokenType,
+    //       discordUser: token.profile
+    //     }
+    //   }
+    // },
     async signIn() {
       const isAllowedToSignIn = true
       if (isAllowedToSignIn) {
