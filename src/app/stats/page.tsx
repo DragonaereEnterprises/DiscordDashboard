@@ -1,13 +1,9 @@
 "use server";
 
-import Image from 'next/image'
-import Link from 'next/link'
-import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
 import { gql } from '../graphql/gql';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
-
-// rewrite to "use server"
+import { getClient } from "@/libs/apolloClient";
 
 const query = gql(`
   query getBotStats {
@@ -22,7 +18,14 @@ const query = gql(`
 
 
 export default async function Stats() {
-  // const { data } = useSuspenseQuery(query);
+  const { data } = await getClient().query({
+    query,
+    context: {
+      fetchOptions: {
+        next: { revalidate: 5 },
+      },
+    }
+  })
 
   return (
     <>
@@ -38,7 +41,7 @@ export default async function Stats() {
           </div>
           <div className="mainbody">
             <div className='subtitle'>
-              {/* {data.botstats!.map(data => {
+              {data.botstats!.map(data => {
                 
                 return (
                   <div key={data!.id}>
@@ -47,8 +50,7 @@ export default async function Stats() {
                     <p>User Count: {data!.userCount}</p>
                   </div>
                 )
-              })} */}
-              broken
+              })}
             </div>
           </div>
         </div>
