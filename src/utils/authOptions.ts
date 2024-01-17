@@ -5,6 +5,8 @@ import Discord from "next-auth/providers/discord"
 import type { NextAuthOptions } from "next-auth";
 import { fetchGuildsWithPerms } from "./fetchGuildsWithPerms";
 
+// Still want to add a way to save user info if possible... But maybe don't for security purposes :KEKW:
+
 const scopes = [ 'identify', 'email', "guilds", "applications.commands.permissions.update" ]
 
 const providers = [

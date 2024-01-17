@@ -1,4 +1,4 @@
-"use client";
+"use server";
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -7,8 +7,7 @@ import { gql } from '../graphql/gql';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 
-export const dynamic = "force-dynamic";
-
+// rewrite to "use server"
 
 const query = gql(`
   query getBotStats {
@@ -22,8 +21,8 @@ const query = gql(`
 `);
 
 
-export default function Stats() {
-  const { data } = useSuspenseQuery(query);
+export default async function Stats() {
+  // const { data } = useSuspenseQuery(query);
 
   return (
     <>
@@ -39,7 +38,7 @@ export default function Stats() {
           </div>
           <div className="mainbody">
             <div className='subtitle'>
-              {data.botstats!.map(data => {
+              {/* {data.botstats!.map(data => {
                 
                 return (
                   <div key={data!.id}>
@@ -48,7 +47,8 @@ export default function Stats() {
                     <p>User Count: {data!.userCount}</p>
                   </div>
                 )
-              })}
+              })} */}
+              broken
             </div>
           </div>
         </div>
