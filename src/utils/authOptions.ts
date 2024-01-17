@@ -1,11 +1,9 @@
+import type { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next"
+import { getServerSession } from "next-auth"
 
-import { NextAuthOptions } from "next-auth";
 import Discord from "next-auth/providers/discord"
-
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
-import { randomBytes, randomUUID } from "crypto";
-const prisma = new PrismaClient()
+import type { NextAuthOptions } from "next-auth";
+import { fetchGuildsWithPerms } from "./fetchGuildsWithPerms";
 
 const scopes = [ 'identify', 'email', "guilds", "applications.commands.permissions.update" ]
 
@@ -13,24 +11,67 @@ const providers = [
   Discord({
     clientId: process.env.DISCORD_CLIENT_ID ?? "",
     clientSecret: process.env.DISCORD_CLIENT_SECRET ?? "",
+    allowDangerousEmailAccountLinking: true,
     authorization: {params: {scope: scopes.join(' ')}},
   })
 ]
 
-export const nextAuthOptions: NextAuthOptions = {
-  providers,
-  secret: '+Urs3ZfrKLJJkWgt3vYxGFGJj7HNvNNz16MI7Tyu/9k=',
+export const authOptions = {
   session: {
-    strategy: "database",
-    maxAge: 30 * 24 * 60 * 60,
-    generateSessionToken: () => {
-      return randomUUID?.() ?? randomBytes(32).toString("hex")
+    strategy: 'jwt',
+  },
+  pages: {
+    signIn: '/',
+    signOut: '/auth/signout',
+    error: '/auth/error',
+    verifyRequest: '/auth/verify-request',
+    newUser: '/auth/new-user'
+  },
+  providers,
+  callbacks: {
+    async jwt({ token, user, profile, account }) {
+      if(user){
+        token.id = user.id
+      }
+      if (account) {
+        token.accessToken = account.access_token;
+        token.tokenType = account.token_type;
+        token.global_name = account.global_name
+      }
+      if (profile) {
+        token.profile = profile;
+        token.global_name = profile.global_name
+      }
+      // token.guilds = fetchGuildsWithPerms(account?.access_token?)
+      return token
+    },
+    session({ session, token }) {
+      return { ...session,
+        user: { ...session.user,
+          id: token.id,
+          global_name: token.global_name,
+          accessToken: token.access_token,
+          tokenType: token.tokenType,
+          discordUser: token.profile
+        }
+      }
+    },
+    async signIn() {
+      const isAllowedToSignIn = true
+      if (isAllowedToSignIn) {
+        return true
+      } else {
+        return false
+      }
+    },
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith("/")) return `${baseUrl}${url}`
+      else if (new URL(url).origin === baseUrl) return url
+      return baseUrl
     }
   },
-  jwt: {
-    maxAge: 60 * 60 * 24 * 30,
-    // You can define your own encode/decode functions for signing and encryption
-    // async encode() {},
-    // async decode() {},
-  }
+} satisfies NextAuthOptions
+
+export function auth(...args: [GetServerSidePropsContext["req"], GetServerSidePropsContext["res"]] | [NextApiRequest, NextApiResponse] | []) {
+  return getServerSession(...args, authOptions)
 }

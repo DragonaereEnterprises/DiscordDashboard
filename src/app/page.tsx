@@ -1,15 +1,12 @@
-"use client"
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/utils/authOptions';
 
-import Image from 'next/image'
-import { signIn } from "next-auth/react"
-
-export default function Home() {
+export default async function Home() {
   return (
     <>
-      <nav className="navbar">
-        <Image className='navbar-image' src="https://images.static.dragonaere.com/logos/transparent/orange.png" alt={'test'} width={64} height={64} />
-        <button className='signin-button' onClick={() => signIn("Discord")}>DO NOT USE</button>
-      </nav>
+      <Navbar />
       <main className="main">
         <div className="content">
           <div className="head">
@@ -26,9 +23,7 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <footer className="footer">
-        <p>© 2024 Dragonaere Enterprises</p>
-      </footer>
+      <Footer />
     </>
   )
 }

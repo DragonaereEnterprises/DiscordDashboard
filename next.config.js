@@ -7,5 +7,9 @@ module.exports = {
         protocol: 'https',
         hostname: 'images.static.dragonaere.com'
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.discordapp.com'
+      }
     ],
   },}
