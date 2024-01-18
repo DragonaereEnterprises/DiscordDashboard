@@ -8,7 +8,8 @@
     "build": "next build",
     "lint": "next lint",
     "codegen": "graphql-codegen",
-    "vercel": "vercel"
+    "vercel": "vercel",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@apollo/client": "3.8.9",
