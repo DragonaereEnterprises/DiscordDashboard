@@ -9,7 +9,7 @@
     "lint": "next lint",
     "codegen": "graphql-codegen",
     "vercel": "vercel",
-    "postinstall": "prisma generate"
+    "postinstall": "--unsafe-perm prisma generate"
   },
   "dependencies": {
     "@apollo/client": "3.8.9",
