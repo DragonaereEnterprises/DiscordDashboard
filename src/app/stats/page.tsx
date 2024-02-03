@@ -41,7 +41,7 @@ export default async function Stats() {
           </div>
           <div className="mainbody">
             <div className='subtitle'>
-              {data.botstats!.map(data => {
+              {data.botstats!.map((data: any) => {
                 return (
                   <div key={data!.id}>
                     <p>Server Count: {data!.serverCount}</p>
