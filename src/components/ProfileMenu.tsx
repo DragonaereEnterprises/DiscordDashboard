@@ -4,69 +4,50 @@ import { useRouter } from 'next/navigation'
 
 import {
   Avatar,
-  Box,
   Button,
-  Center,
-  Flex,
-  Link,
   Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  MenuList,
-  Stack,
-  Text,
-  useColorMode,
-  useColorModeValue,
-  useDisclosure,
-} from '@chakra-ui/react'
+} from '@mui/material'
 import { signOut } from 'next-auth/react';
-
-type User = {
-  global_name: string
-  image: string
-  email: string
-}
+import React from 'react';
+import MuiMenuItem from "@mui/material/MenuItem";
+import { withStyles } from "@mui/styles";
+import { User } from 'next-auth';
+import { width } from '@mui/system';
 
 type Props = {
   user: User,
 }
 
+const MenuItem = withStyles({
+  root: {
+    justifyContent: "center"
+  }
+})(MuiMenuItem);
+
 export default function ProfileMenu( { user }:Props ) {
   const router = useRouter()
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <Menu>
-      <MenuButton
-        as={Button}
-        rounded={'full'}
-        variant={'link'}
-        cursor={'pointer'}
-        minW={0}>
-        <Avatar
-          size={'lg'}
-          src={user?.image || ''}
-        />
-      </MenuButton>
-      <MenuList alignItems={'center'}>
-        <br />
-        <Center>
-          <Avatar
-            size={'2xl'}
-            src={user?.image || ''}
-          />
-        </Center>
-        <br />
-        <Center>
-          <Text fontSize='22px' as="b">{user.global_name}</Text>
-        </Center>
+    <div>
+      <Button id="profile" aria-controls="profile" aria-haspopup="true" onClick={handleClick}><Avatar sx={{width: '52px', height: '52px'}} src={user?.image || ''} /></Button>
+      <Menu PaperProps={{sx: {width: '144px'}}} id="profile" anchorEl={anchorEl} open={open} onClose={handleClose} MenuListProps={{ 'aria-labelledby': 'profile', }}>
         <center>
-          <Text fontSize='15px'>{user?.email}</Text>
-        </center>
-        <MenuDivider />
+        <Avatar sx={{width: '128px', height: '128px'}} src={user?.image || ''} />
+        <br />
+        <p>{user.global_name}</p>
         <MenuItem onClick={() => router.push('/servers')}>Your Servers</MenuItem>
         <MenuItem onClick={() => router.push('/stats')}>Bot Stats</MenuItem>
-        <MenuItem onClick={() => signOut()}><Text color={'tomato'}>Logout</Text></MenuItem>
-      </MenuList>
-    </Menu>
+        <MenuItem onClick={() => signOut()}><p color={'#FF0000'}>Logout</p></MenuItem>
+        </center>
+      </Menu>
+    </div>
   )
 }

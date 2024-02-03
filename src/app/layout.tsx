@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter'
+import Theme from "../components/ColorMode";
+import getInitColorSchemeScript from "@mui/system/cssVars/getInitColorSchemeScript";
+import { Experimental_CssVarsProvider } from "@mui/material";
+
 import './globals.css';
 import { ApolloWrapper } from './ApolloWrapper';
-import { Providers } from './providers'
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: {
@@ -21,10 +23,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Providers>
-          <ApolloWrapper>{children}</ApolloWrapper>
-        </Providers>
+      <body>
+        <AppRouterCacheProvider>
+          <Experimental_CssVarsProvider defaultMode="system">
+            {getInitColorSchemeScript({
+              attribute: "data-mui-color-scheme",
+              modeStorageKey: "mui-mode",
+              colorSchemeStorageKey: "mui-color-scheme",
+              defaultMode: "system",
+            })}
+            <Theme>
+              {children}
+            </Theme>
+          </Experimental_CssVarsProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   )

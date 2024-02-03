@@ -26,38 +26,38 @@ const providers = [
 ]
 
 export const authOptions = {
-  adapter: PrismaAdapter(prisma) as Adapter,
+  //adapter: PrismaAdapter(prisma) as Adapter,
   session: {
-    strategy: 'database',
+    strategy: 'jwt',
   },
   providers,
   callbacks: {
-    // async jwt({ token, user, profile, account }) {
-    //   if(user){
-    //     token.id = user.id
-    //   }
-    //   if (account) {
-    //     token.accessToken = account.access_token;
-    //     token.tokenType = account.token_type;
-    //     token.global_name = account.global_name
-    //   }
-    //   if (profile) {
-    //     token.profile = profile;
-    //     token.global_name = profile.global_name
-    //   }
-    //   // token.guilds = fetchGuildsWithPerms(account?.access_token?)
-    //   return token
-    // },
-    // session({ session, token }) {
-    //   return { ...session,
-    //     user: { ...session.user,
-    //       id: token.id,
-    //       global_name: token.global_name,
-    //       tokenType: token.tokenType,
-    //       discordUser: token.profile
-    //     }
-    //   }
-    // },
+    async jwt({ token, user, profile, account }) {
+      if(user){
+        token.id = user.id
+      }
+      if (account) {
+        token.accessToken = account.access_token;
+        token.tokenType = account.token_type;
+        token.global_name = account.global_name
+      }
+      if (profile) {
+        token.profile = profile;
+        token.global_name = profile.global_name
+      }
+      // token.guilds = fetchGuildsWithPerms(account?.access_token?)
+      return token
+    },
+    session({ session, token }) {
+      return { ...session,
+        user: { ...session.user,
+          id: token.id,
+          global_name: token.global_name,
+          tokenType: token.tokenType,
+          discordUser: token.profile
+        }
+      }
+    },
     async signIn() {
       const isAllowedToSignIn = true
       if (isAllowedToSignIn) {
