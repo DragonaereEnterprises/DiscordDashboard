@@ -9,7 +9,7 @@ export const { getClient } = registerApolloClient(() => {
   return new NextSSRApolloClient({
     cache: new NextSSRInMemoryCache(),
     link: new HttpLink({
-      uri: "http://discordbotapi.dragonaere.com:4000/graphql/",
-    }),
+      uri: "https://discordbotapi.dragonaere.com/",
+    })
   });
 });
