@@ -1,16 +1,9 @@
 import type { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next"
-import type { Adapter } from "next-auth/adapters";
 import { getServerSession } from "next-auth"
 
 import Discord from "next-auth/providers/discord"
 import type { NextAuthOptions } from "next-auth";
 import { fetchGuildsWithPerms } from "./fetchGuildsWithPerms";
-
-import { PrismaAdapter } from "@auth/prisma-adapter"
-import { PrismaClient } from "@prisma/client"
-
-const prisma = new PrismaClient()
-
 
 // Still want to add a way to save user info if possible... But maybe don't for security purposes :KEKW:
 
@@ -26,7 +19,6 @@ const providers = [
 ]
 
 export const authOptions = {
-  //adapter: PrismaAdapter(prisma) as Adapter,
   session: {
     strategy: 'jwt',
   },
