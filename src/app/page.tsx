@@ -1,7 +1,5 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/utils/auth';
 
 export default async function Home() {
   return (
