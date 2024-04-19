@@ -1,9 +1,11 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { auth } from "@/utils/auth"
+import { NextResponse } from "next/server"
 
-export function middleware(request: NextRequest) {
-  return NextResponse.redirect(new URL('/', request.url))
-}
+export default auth((req:any) => {
+  if (!req.auth) {
+    return NextResponse.redirect(new URL('/', req.url))
+  }
+})
 
 export const config = {
   matcher: ["/servers/:path*"],
