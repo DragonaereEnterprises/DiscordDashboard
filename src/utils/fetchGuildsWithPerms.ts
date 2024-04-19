@@ -1,18 +1,37 @@
-export async function fetchGuildsWithPerms(access_token: string) {
-  let guilds = await fetch("https://discordapp.com/api/v10/users/@me", {
+import { auth } from "./auth";
+
+export async function fetchGuildsWithPerms() {
+  const session = await auth();
+
+  return await fetch("https://discord.com/api/v10/users/@me/guilds", {
     headers: {
-      Authorization: "Bearer " + access_token,
+      Authorization: "Bearer " + session.user.token,
+      "Content-Type": "application/json"
     },
   })
-  .then(async (guilds) => {
-    console.log(guilds.status);
-
-    return guilds;
+  .then(function(response){
+    return response.json();
+  }, function(error) {
+    // Called when Discord responds with an error
+    console.error(error);
+    return false;
   })
-  .catch(console.error);
+  .then(function(guildsJson) {
+    return guildsJson.filter((guild: any) => {
+      if (guild.permissions == 1125899906842623 || guild.owner == true) {
+        return guild;
+      }
+    });
+  }, function(error) {
+    // Called when Database responds with an error
+    console.error(error);
+    return false;
+  })
+  .then(function(guilds) {
+    return guilds.sort((a: { name: string; }, b: { name: string; }) => a.name.localeCompare(b.name))
+  });
 
   // Figure out what guilds user has "Manage Server" or "Admininstrator" Permissions in
   // Then return then to session.user.guilds so they can be rendered nicely on the "servers" page
 
 }
-

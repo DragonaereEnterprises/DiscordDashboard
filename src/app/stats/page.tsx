@@ -22,7 +22,7 @@ export default async function Stats() {
     query,
     context: {
       fetchOptions: {
-        next: { revalidate: 5 },
+        next: { revalidate: 30 },
       },
     }
   })

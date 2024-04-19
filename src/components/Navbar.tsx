@@ -2,14 +2,13 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/utils/authOptions';
+import { auth } from '@/utils/auth';
 import SigninButton from './SigninButton';
 import ProfileMenu from './ProfileMenu';
 import { User } from 'next-auth';
 
 export default async function Navbar() {
-  let session = await getServerSession(authOptions)
+  let session = await auth()
   return (
     <nav className="navbar">
       <Link href="/">

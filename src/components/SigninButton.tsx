@@ -1,9 +1,14 @@
-"use client"
-
-import { signIn } from "next-auth/react"
+import { signIn } from "@/utils/auth"
 
 export default function SigninButton() {
   return (
-    <button className="signin-button" onClick={() => signIn("discord")}>Sign in</button>
+    <form
+      action={async () => {
+        "use server"
+        await signIn("discord", { redirectTo: "/servers" })
+      }}
+    >
+      <button className="signin-button">Sign in</button>
+    </form>
   )
 }

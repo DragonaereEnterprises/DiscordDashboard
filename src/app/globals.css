@@ -54,8 +54,32 @@ body {
 
 .mainbody {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.servers {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.server {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: 200px;
+}
+
+.server-name {
+  width: 160px; 
+  font-size: 1.2rem;
+  text-wrap: wrap;
 }
 
 .title {

@@ -10,7 +10,7 @@ import {
 
 function makeClient() {
   const httpLink = new HttpLink({
-    uri: "https://discordbotapi.dragonaere.com/",
+    uri: "http://discordbotapi.dragonaere.com/",
     fetchOptions: { cache: "no-store" },
   });
 
