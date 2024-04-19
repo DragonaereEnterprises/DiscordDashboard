@@ -6,23 +6,15 @@ import {
   Avatar,
   Button,
   Menu,
+  MenuItem,
 } from '@mui/material'
 import { signOut } from 'next-auth/react';
 import React from 'react';
-import MuiMenuItem from "@mui/material/MenuItem";
-import { withStyles } from "@mui/styles";
 import { User } from 'next-auth';
-import { width } from '@mui/system';
 
 type Props = {
   user: User,
 }
-
-const MenuItem = withStyles({
-  root: {
-    justifyContent: "center"
-  }
-})(MuiMenuItem);
 
 export default function ProfileMenu( { user }:Props ) {
   const router = useRouter()

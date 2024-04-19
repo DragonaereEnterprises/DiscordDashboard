@@ -1,10 +1,4 @@
-import { auth } from "./auth";
-import { fetchGuildsWithPerms } from "./fetchGuildsWithPerms";
-
 export async function fetchGuildsWithBot() {
-  const session = await auth();
-  const guilds = await fetchGuildsWithPerms();
-
   // const botsGuilds = data from graphql query
 
   // respond with list of guilds both the user is admin of and the bot are in
