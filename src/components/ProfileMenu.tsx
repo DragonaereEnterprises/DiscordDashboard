@@ -42,7 +42,7 @@ export default function ProfileMenu( { user }:Props ) {
         <center>
         <Avatar sx={{width: '128px', height: '128px'}} src={user?.image || ''} />
         <br />
-        <p>{user.global_name}</p>
+        <p>{user.name}</p>
         <MenuItem onClick={() => router.push('/servers')}>Your Servers</MenuItem>
         <MenuItem onClick={() => router.push('/stats')}>Bot Stats</MenuItem>
         <MenuItem onClick={() => signOut()}><p color={'#FF0000'}>Logout</p></MenuItem>

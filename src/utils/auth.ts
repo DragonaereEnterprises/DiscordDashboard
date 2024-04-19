@@ -1,6 +1,5 @@
 import NextAuth from "next-auth"
 import Discord from "next-auth/providers/discord"
-import { useState } from "react";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
