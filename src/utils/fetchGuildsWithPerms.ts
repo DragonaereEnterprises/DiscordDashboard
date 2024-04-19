@@ -3,6 +3,10 @@ import { auth } from "./auth";
 export async function fetchGuildsWithPerms() {
   const session = await auth();
 
+  if (!session) {
+    return false;
+  }
+
   return await fetch("https://discord.com/api/v10/users/@me/guilds", {
     headers: {
       Authorization: "Bearer " + session.user.token,
