@@ -17,7 +17,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   providers: [
     Discord({
-      authorization: "https://discord.com/api/oauth2/authorize?scope=identify+email+guilds+applications.commands.permissions.update",
+      authorization: "https://discord.com/oauth2/authorize?scope=identify+email+guilds+applications.commands.permissions.update",
     })
   ],
 })

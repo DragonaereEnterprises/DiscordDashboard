@@ -2,7 +2,6 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { auth } from '@/utils/auth';
-import { fetchGuildsWithPerms } from '@/utils/fetchGuildsWithPerms';
 import { fetchGuildsWithBot } from '@/utils/fetchGuildsWithBot';
 
 // Grab guilds from session.user.guilds and render them in a way the the User can see what servers they have added and can add the bot too
