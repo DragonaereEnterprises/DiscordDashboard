@@ -1,4 +1,5 @@
 "use server";
+export const dynamic = 'force-dynamic';
 
 import { gql } from "@apollo/client";
 import Footer from '@/components/Footer';
