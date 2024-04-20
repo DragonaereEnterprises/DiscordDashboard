@@ -1,11 +1,11 @@
 "use server";
 
-import { gql } from '../graphql/gql';
+import { gql } from "@apollo/client";
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import { getClient } from "@/libs/apolloClient";
 
-const query = gql(`
+const query = gql`
   query getBotStats {
     botstats {
       id
@@ -14,7 +14,7 @@ const query = gql(`
       userCount
     }
   }
-`);
+`;
 
 
 export default async function Stats() {

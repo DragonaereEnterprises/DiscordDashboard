@@ -1,13 +1,11 @@
 "use server"
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { auth } from '@/utils/auth';
-import { fetchGuildsWithBot } from '@/utils/fetchGuildsWithBot';
-
-// Grab guilds from session.user.guilds and render them in a way the the User can see what servers they have added and can add the bot too
+import { fetchGuilds } from '@/utils/fetchGuilds';
+import Link from 'next/link';
 
 export default async function Servers() {
-  let guildsBot = await fetchGuildsWithBot();
+  const guilds = await fetchGuilds();
   return (
     <>
       <Navbar />
@@ -18,16 +16,33 @@ export default async function Servers() {
               <p>Servers</p>
             </div>
             <div className="servers">
-              {/* {guildsBot.map((guild: any) => (
+              {guilds.map((guild: any) => (
                 <div className='server' key={guild.id}>
-                  <div className='server-image'>
-                    <img width="128px" height="128px" src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`} alt={guild.name} />
-                  </div>
-                  <div className='server-name'>
-                    <p>{guild.name}</p>
-                  </div>
+                  {guild.bot ?
+                    <Link href={`/servers/${guild.id}`}>
+                      <div>
+                        <div className='server-image'>
+                          <img width="128px" height="128px" src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`} alt={guild.name} />
+                        </div>
+                        <div className='server-name'>
+                          <p>{guild.name}</p>
+                        </div>
+                      </div>
+                    </Link>
+                    :
+                    <Link href={`https://discord.com/oauth2/authorize?client_id=931671325737635840&scope=bot&permissions=8&response_type=code&redirect_uri=https%3A%2F%2Fbot.dragonaere.com%2Fservers%2F&guild_id=${guild.id}&disable_guild_select=true`}>
+                      <div className='server' key={guild.id}>
+                        <div className='server-image'>
+                          <img width="128px" height="128px" style={{ filter: "grayscale(100%)" }} src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`} alt={guild.name} />
+                        </div>
+                        <div className='server-name'>
+                          <p>{guild.name}</p>
+                        </div>
+                      </div>
+                    </Link>
+                  }
                 </div>
-              ))} */}
+              ))}
             </div>
           </div>
         </div>

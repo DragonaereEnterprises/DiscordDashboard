@@ -7,7 +7,6 @@
     "start": "next start",
     "build": "next build",
     "lint": "next lint",
-    "codegen": "graphql-codegen",
     "vercel": "vercel"
   },
   "dependencies": {
@@ -30,9 +29,7 @@
     "tsx": "4.7.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "5.0.0",
-    "@graphql-codegen/client-preset": "4.1.0",
-    "@graphql-typed-document-node/core": "3.2.0",
+    "@parcel/watcher": "^2.4.1",
     "@types/node": "20.11.4",
     "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",

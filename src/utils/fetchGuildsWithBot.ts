@@ -1,10 +1,26 @@
+import { gql } from "@apollo/client";
+import { getClient } from "@/libs/apolloClient";
+import { RedirectType } from "next/navigation";
+
+const query = gql`
+  query getBotGuilds {
+    botguilds {
+      id
+    }
+  }
+`;
+
 export async function fetchGuildsWithBot() {
-  // const botsGuilds = data from graphql query
+  const { data } = await getClient().query({
+    query,
+    context: {
+      fetchOptions: {
+        next: { revalidate: 30 },
+      },
+    }
+  })
 
-  // respond with list of guilds both the user is admin of and the bot are in
-  // guilds.filter((guild: any) => botsGuilds.includes(guild.id));
+  const guilds = data.botguilds.map((data: any) => data.id);
 
-  // add boolean to guilds to show if the bot is in the guild
-  // if it isn't, the server page will gray out that server and display it last
-  // and make it so that clicking the server will prompt the user to invite the bot
+  return guilds[0];
 }

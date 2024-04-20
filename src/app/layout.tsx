@@ -6,7 +6,6 @@ import getInitColorSchemeScript from "@mui/system/cssVars/getInitColorSchemeScri
 import { Experimental_CssVarsProvider } from "@mui/material";
 
 import './globals.css';
-import { ApolloWrapper } from './ApolloWrapper';
 
 export const metadata: Metadata = {
   title: {
