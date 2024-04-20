@@ -12,6 +12,7 @@ export async function fetchGuildsWithPerms() {
       Authorization: "Bearer " + session.user.token,
       "Content-Type": "application/json"
     },
+    next: { revalidate: 300 }
   })
   .then(function(response){
     return response.json();
