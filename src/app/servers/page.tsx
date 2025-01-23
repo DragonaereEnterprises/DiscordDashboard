@@ -1,15 +1,33 @@
 "use server"
 
+import { headers } from 'next/headers';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { fetchGuilds } from '@/utils/fetchGuilds';
 import Link from 'next/link';
+import PopupWrapper from '@/components/PopupWrapper';
 
-export default async function Servers() {
+interface PageProps {
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export default async function Servers({ searchParams }: PageProps) {
+  const params = await Promise.resolve(searchParams);
+  const error = typeof params.error === 'string' ? params.error : null;
+  const errorDescription = typeof params.error_description === 'string' 
+    ? params.error_description 
+    : null;
+
   const guilds = await fetchGuilds();
   return (
     <>
       <Navbar />
+      {error && (
+        <PopupWrapper
+          title="Error"
+          message={errorDescription || 'An unknown error occurred'}
+        />
+      )}
       <main className="main">
         <div className="content">
           <div className="mainbody">
@@ -32,9 +50,9 @@ export default async function Servers() {
                     </Link>
                     :
                     <Link href={`https://discord.com/oauth2/authorize?client_id=931671325737635840&scope=bot&permissions=8&response_type=code&redirect_uri=https%3A%2F%2Fbot.dragonaere.com%2Fservers%2F&guild_id=${guild.id}&disable_guild_select=true`}>
-                      <div className='server' key={guild.id}>
-                        <div className='server-image'>
-                          <img width="128px" height="128px" style={{ filter: "grayscale(100%)" }} src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`} alt={guild.name} />
+                      <div key={guild.id}>
+                        <div className='server-image grayscale'>
+                          <img width="128px" height="128px" src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`} alt={guild.name} />
                         </div>
                         <div className='server-name'>
                           <p>{guild.name}</p>
@@ -50,5 +68,5 @@ export default async function Servers() {
       </main>
       <Footer />
     </>
-  )
+  );
 }

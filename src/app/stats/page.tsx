@@ -16,7 +16,6 @@ const query = gql`
   }
 `;
 
-
 export default async function Stats() {
   const { data } = await getClient().query({
     query,
