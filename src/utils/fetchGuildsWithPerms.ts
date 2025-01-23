@@ -23,7 +23,8 @@ export async function fetchGuildsWithPerms() {
   })
   .then(function(guildsJson) {
     return guildsJson.filter((guild: any) => {
-      if (guild.permissions == 1125899906842623 || guild.owner == true) {
+      const ADMINISTRATOR = 0x00000008;
+      if ((guild.permissions & ADMINISTRATOR) === ADMINISTRATOR || guild.owner === true) {
         return guild;
       }
     });

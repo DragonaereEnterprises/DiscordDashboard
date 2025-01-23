@@ -1,11 +1,6 @@
 import NextAuth from "next-auth"
 import Discord from "next-auth/providers/discord"
 
-console.log("AUTH_SECRET:", process.env.AUTH_SECRET);
-console.log("AUTH_DISCORD_ID:", process.env.AUTH_DISCORD_ID);
-console.log("AUTH_DISCORD_SECRET:", process.env.AUTH_DISCORD_SECRET);
-
-
 export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     jwt({ token, account }: { token: any, account: any }) {
@@ -25,4 +20,3 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     })
   ],
 })
-

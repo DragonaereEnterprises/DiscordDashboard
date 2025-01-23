@@ -1,6 +1,5 @@
 import { gql } from "@apollo/client";
 import { getClient } from "@/libs/apolloClient";
-import { RedirectType } from "next/navigation";
 
 const query = gql`
   query getBotGuilds {
