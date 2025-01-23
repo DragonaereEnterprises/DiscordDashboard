@@ -19,4 +19,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       authorization: "https://discord.com/oauth2/authorize?scope=identify+email+guilds+applications.commands.permissions.update",
     })
   ],
+  pages: {
+    signOut: '/',
+  }
 })

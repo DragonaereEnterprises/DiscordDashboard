@@ -6,12 +6,16 @@ import Footer from '@/components/Footer';
 import { fetchGuilds } from '@/utils/fetchGuilds';
 import Link from 'next/link';
 import PopupWrapper from '@/components/PopupWrapper';
+import { auth } from '@/utils/auth';
+import { redirect } from 'next/navigation';
 
 interface PageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 export default async function Servers({ searchParams }: PageProps) {
+  const session = await auth()
+  if (!session) return redirect('/');
   const params = await searchParams;
   const error = typeof params.error === 'string' ? params.error : null;
   const errorDescription = typeof params.error_description === 'string' 
