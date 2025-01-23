@@ -10,3 +10,5 @@ export default auth((req:any) => {
 export const config = {
   matcher: ["/servers/:path*"],
 }
+
+export { auth as middleware } from "@/utils/auth"
