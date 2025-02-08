@@ -6,6 +6,7 @@ import Popup from './Popup';
 interface PopupWrapperProps {
   title: string;
   message: string;
+  redirectPath?: string;
 }
 
 const PopupWrapper: React.FC<PopupWrapperProps> = ({ title, message, redirectPath }) => {
