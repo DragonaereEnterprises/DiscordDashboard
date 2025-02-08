@@ -16,4 +16,9 @@ const nextConfig = {
   },
 }
 
-module.exports = withPlausibleProxy()(nextConfig);
+module.export = nextConfig;
+
+// module.exports = withPlausibleProxy({
+//   customDomain: 'https://plausible.andrewstill.moe',
+//   trackLocalhost: true,
+// })(nextConfig);
