@@ -17,12 +17,28 @@ export default async function Servers({ searchParams }: PageProps) {
   const session = await auth()
   if (!session) return redirect('/');
   const params = await searchParams;
-  const error = typeof params.error === 'string' ? params.error : null;
-  const errorDescription = typeof params.error_description === 'string' 
+  let error = typeof params.error === 'string' ? params.error : null;
+  let errorDescription = typeof params.error_description === 'string' 
     ? params.error_description 
     : null;
 
-  const guilds = await fetchGuilds();
+  let guilds = [] as {
+    id: string;
+    name: string;
+    icon: string;
+    owner: boolean;
+    permissions: string;
+    features: string[];
+    bot: boolean;
+  }[];
+
+  try {
+    guilds = await fetchGuilds();
+  } catch (err) {
+    console.error(err);
+    error = 'Bot Offline';
+    errorDescription = 'Failed to get guilds from bot. Please try again later.';
+  }
   return (
     <>
       <Navbar />
@@ -30,6 +46,7 @@ export default async function Servers({ searchParams }: PageProps) {
         <PopupWrapper
           title="Error"
           message={errorDescription || 'An unknown error occurred'}
+          redirectPath={error === 'Bot Offline' ? '/' : undefined}
         />
       )}
       <main className="main">

@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import HeroBanner from '@/components/HeroBanner';
 
 export default async function Home() {
   return (
@@ -7,13 +8,7 @@ export default async function Home() {
       <Navbar />
       <main className="main">
         <div className="content">
-          <div className="head">
-            <h1 className="title">Dragonaere</h1>
-            <h1 className="title">&nbsp;</h1>
-            <h1 className="title orange">Discord</h1>
-            <h1 className="title">&nbsp;</h1>
-            <h1 className="title">Bot</h1>
-          </div>
+          <HeroBanner />
           <div className="mainbody">
             <p className='subtitle'>
               Coming Soon™
