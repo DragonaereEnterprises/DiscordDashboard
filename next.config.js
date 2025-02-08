@@ -16,9 +16,4 @@ const nextConfig = {
   },
 }
 
-module.exports = withPlausibleProxy(
-  {
-    customDomain: 'https://plausible.dragonaere.com',
-    domain: 'bot.dragonaere.com'
-  }
-)(nextConfig);
+module.exports = withPlausibleProxy()(nextConfig);
