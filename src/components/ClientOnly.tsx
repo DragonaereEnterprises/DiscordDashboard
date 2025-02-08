@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { getInitColorSchemeScript } from "@mui/material/styles";
+import InitColorSchemeScript from '@mui/material/InitColorSchemeScript'
 
 export default function ClientOnly({ children }: { children: React.ReactNode }) {
   const [isClient, setIsClient] = useState(false);
@@ -16,7 +16,7 @@ export default function ClientOnly({ children }: { children: React.ReactNode }) 
 
   return (
     <>
-      {getInitColorSchemeScript({
+      {InitColorSchemeScript({
         attribute: "data-mui-color-scheme",
         modeStorageKey: "mui-mode",
         colorSchemeStorageKey: "mui-color-scheme",

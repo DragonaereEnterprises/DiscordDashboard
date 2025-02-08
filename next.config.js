@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
+const { withPlausibleProxy } = require('next-plausible')
 
-module.exports = {
+const nextConfig = {
   images: {
     remotePatterns: [
       {
@@ -12,4 +13,12 @@ module.exports = {
         hostname: 'cdn.discordapp.com'
       }
     ],
-  },}
+  },
+}
+
+module.exports = withPlausibleProxy(
+  {
+    customDomain: 'https://plausible.dragonaere.com',
+    domain: 'bot.dragonaere.com'
+  }
+)(nextConfig);
