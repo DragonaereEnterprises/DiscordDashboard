@@ -22,7 +22,7 @@
     "@next/env": "^15.1.6",
     "dotenv": "^16.4.7",
     "graphql": "^16.8.1",
-    "next": "15.1.6",
+    "next": "15.2.3",
     "next-auth": "5.0.0-beta.25",
     "next-plausible": "^3.12.4",
     "react": "19.0.0",
