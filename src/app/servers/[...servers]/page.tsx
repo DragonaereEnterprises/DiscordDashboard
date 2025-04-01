@@ -19,5 +19,4 @@ export default async function ServerEditor() {
       </main>
       <Footer />
     </>
-  )
 }
