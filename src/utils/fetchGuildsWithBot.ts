@@ -10,14 +10,15 @@ const query = gql`
 `;
 
 export async function fetchGuildsWithBot() {
-  const { data } = await getClient().query({
+  const client = getClient();
+  const { data } = await client.query({
     query,
     context: {
       fetchOptions: {
         next: { revalidate: 30 },
       },
     }
-  })
+  });
 
   const guilds = data.botguilds.map((data: any) => data.id);
 
