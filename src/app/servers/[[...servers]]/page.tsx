@@ -1,5 +1,3 @@
-"use server"
-
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { fetchGuilds } from '@/utils/fetchGuilds';
@@ -9,20 +7,15 @@ import { auth } from '@/utils/auth';
 import { redirect } from 'next/navigation';
 import ServerSelectorPage from '@/components/ServerSelectorPage';
 
-interface PageProps {
-  params: { servers?: string[] };
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}
-
-export default async function Servers({ params, searchParams }: PageProps) {
-  const session = await auth()
+export default async function Servers({ params, searchParams }: any) {
+  const session = await auth();
   if (!session) return redirect('/');
 
   const pathParts = params.servers || [];
   const isIndexPage = pathParts.length === 0;
   const serverId = pathParts[0];
 
-  const errorParams = await searchParams;
+  const errorParams = searchParams;
   let error = typeof errorParams.error === 'string' ? errorParams.error : null;
   let errorDescription = typeof errorParams.error_description === 'string' 
     ? errorParams.error_description 
