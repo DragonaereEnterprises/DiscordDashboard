@@ -36,8 +36,4 @@ export async function fetchGuildsWithPerms() {
   .then(function(guilds) {
     return guilds.sort((a: { name: string; }, b: { name: string; }) => a.name.localeCompare(b.name))
   });
-
-  // Figure out what guilds user has "Manage Server" or "Admininstrator" Permissions in
-  // Then return then to session.user.guilds so they can be rendered nicely on the "servers" page
-
 }
