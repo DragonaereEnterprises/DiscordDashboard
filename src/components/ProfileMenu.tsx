@@ -11,6 +11,7 @@ import {
 import { signOut } from 'next-auth/react';
 import React from 'react';
 import { User } from 'next-auth';
+import { color } from '@mui/system';
 
 type Props = {
   user: User,
@@ -32,10 +33,11 @@ export default function ProfileMenu( { user }:Props ) {
       <Button id="profile" aria-controls="profile" aria-haspopup="true" onClick={handleClick}><Avatar sx={{width: '52px', height: '52px'}} src={user?.image || ''} /></Button>
       <Menu PaperProps={{sx: {width: '144px'}}} id="profile" anchorEl={anchorEl} open={open} onClose={handleClose} MenuListProps={{ 'aria-labelledby': 'profile', }}>
         <center>
-        <p>{user.name}</p>
+        <b><p>{user.name}</p></b>
         <MenuItem onClick={() => router.push('/servers')}>Your Servers</MenuItem>
-        <MenuItem onClick={() => router.push('/stats')}>Bot Stats</MenuItem>
-        <MenuItem onClick={() => signOut()}><p color={'#FF0000'}>Logout</p></MenuItem>
+        <MenuItem onClick={() => router.push('/stats')}>Global Stats</MenuItem>
+        <MenuItem onClick={() => router.push('/settings')}>Settings</MenuItem>
+        <MenuItem onClick={() => signOut()}><b><p style={{color: "#ff0000"}}>Sign Out</p></b></MenuItem>
         </center>
       </Menu>
     </div>
