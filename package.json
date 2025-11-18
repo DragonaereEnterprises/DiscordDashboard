@@ -9,39 +9,37 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@apollo/client": "3.13.8",
-    "@apollo/client-integration-nextjs": "0.12.2",
+    "@apollo/client": "4.0.9",
+    "@apollo/client-integration-nextjs": "0.14.1",
     "@emotion/cache": "11.14.0",
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.0",
-    "@mui/icons-material": "7.0.2",
-    "@mui/material": "7.0.2",
-    "@mui/material-nextjs": "7.0.2",
-    "@mui/system": "7.0.2",
-    "@next/env": "15.3.1",
-    "dotenv": "16.5.0",
+    "@mui/icons-material": "7.3.5",
+    "@mui/material": "7.3.5",
+    "@mui/material-nextjs": "7.3.5",
+    "@mui/system": "7.3.5",
+    "@next/env": "15.5.6",
+    "dotenv": "17.2.3",
     "graphql": "16.11.0",
-    "next": "15.3.1",
-    "next-auth": "5.0.0-beta.27",
+    "next": "15.5.6",
+    "next-auth": "5.0.0-beta.30",
     "next-plausible": "3.12.4",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "tsx": "4.19.3"
   },
   "devDependencies": {
-    "@types/node": "22.15.2",
-    "@types/react": "19.1.2",
+    "@types/node": "24.10.1",
+    "@types/react": "19.2.6",
     "@types/react-dom": "19.1.2",
-    "eslint": "9.25.1",
-    "eslint-config-next": "15.3.1",
-    "typescript": "5.8.3",
-    "vercel": "41.6.2"
+    "eslint": "9.39.1",
+    "eslint-config-next": "15.5.6",
+    "typescript": "5.9.3"
   },
   "pnpm": {
     "ignoredBuiltDependencies": [
       "esbuild",
       "sharp"
     ]
-  },
-  "packageManager": "pnpm@10.7.1+sha512.2d92c86b7928dc8284f53494fb4201f983da65f0fb4f0d40baafa5cf628fa31dae3e5968f12466f17df7e97310e30f343a648baea1b9b350685dafafffdf5808"
+  }
 }
