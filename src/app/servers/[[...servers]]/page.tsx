@@ -7,7 +7,9 @@ import { auth } from '@/utils/auth';
 import { redirect } from 'next/navigation';
 import ServerSelectorPage from '@/components/ServerSelectorPage';
 
-export default async function Servers({ params, searchParams }: any) {
+export default async function Servers(props: any) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const session = await auth();
   if (!session) return redirect('/');
 
