@@ -17,8 +17,9 @@ const query = gql`
   }
 `;
 
+let data: dataProps;
+
 export default async function Stats() {
-  let data;
   let isBotOffline = false;
   try {
     const res = await getClient().query({
@@ -29,7 +30,7 @@ export default async function Stats() {
         },
       },
     });
-    data = res.data;
+    data = res.data as dataProps;
   } catch (error) {
     console.error("Bot data error:", error);
     isBotOffline = true;
@@ -48,7 +49,7 @@ export default async function Stats() {
                   Failed to get stats from bot.<br />
                   Please try again later</p>
               ) : (
-                data?.botstats?.map((stats: any) => (
+                data.botstats.map((stats: any) => (
                   <div key={stats.id}>
                     <p>Server Count: {stats.serverCount}</p>
                     <p>Channel Count: {stats.channelCount}</p>

@@ -9,16 +9,24 @@ const query = gql`
   }
 `;
 
+let data: dataProps
+
 export async function fetchGuildsWithBot() {
-  const client = getClient();
-  const { data } = await client.query({
-    query,
-    context: {
-      fetchOptions: {
-        next: { revalidate: 30 },
+  let isBotOffline = false;
+  try {
+    const res = await getClient().query({
+      query,
+      context: {
+        fetchOptions: {
+          next: { revalidate: 30 },
+        },
       },
-    }
-  });
+    });
+    data = res.data as dataProps;
+  } catch (error) {
+    console.error("Bot data error:", error);
+    isBotOffline = true;
+  }
 
   const guilds = data.botguilds.map((data: any) => data.id);
 
