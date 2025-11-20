@@ -1,13 +1,14 @@
 {
   "name": "dashboard",
   "version": "1.0.0",
-  "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
     "start": "next start",
     "build": "next build",
     "lint": "next lint"
   },
+  "author": "Andrew Still",
+  "license": "AGPL-3.0-only",
   "dependencies": {
     "@apollo/client": "4.0.9",
     "@apollo/client-integration-nextjs": "0.14.1",
@@ -35,12 +36,6 @@
     "eslint": "9.39.1",
     "eslint-config-next": "16.0.3",
     "typescript": "5.9.3"
-  },
-  "pnpm": {
-    "ignoredBuiltDependencies": [
-      "esbuild",
-      "sharp"
-    ]
   },
   "overrides": {
     "@types/react": "19.2.6",
