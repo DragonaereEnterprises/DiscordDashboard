@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-const { withPlausibleProxy } = require('next-plausible')
 
 const nextConfig = {
   images: {
@@ -14,9 +13,6 @@ const nextConfig = {
       }
     ],
   },
-}
+};
 
-module.exports = withPlausibleProxy({
-  customDomain: 'https://plausible.andrewstill.moe',
-  trackLocalhost: true,
-})(nextConfig);
+export default nextConfig;
