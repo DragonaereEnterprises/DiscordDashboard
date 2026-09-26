@@ -31,7 +31,7 @@ export default function ProfileMenu( { user }:Props ) {
   return (
     <div>
       <Button id="profile" aria-controls="profile" aria-haspopup="true" onClick={handleClick}><Avatar sx={{width: '52px', height: '52px'}} src={user?.image || ''} /></Button>
-      <Menu PaperProps={{sx: {width: '144px'}}} id="profile" anchorEl={anchorEl} open={open} onClose={handleClose} MenuListProps={{ 'aria-labelledby': 'profile', }}>
+      <Menu slotProps={{ paper: { sx: { width: '144px' } }, list: { 'aria-labelledby': 'profile' }, }} id="profile" anchorEl={anchorEl} open={open} onClose={handleClose} >
         <center>
         <b><p>{user.name}</p></b>
         <MenuItem onClick={() => router.push('/servers')}>Your Servers</MenuItem>
