@@ -1,8 +1,11 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import HeroBanner from '@/components/HeroBanner';
+import { auth } from '@/utils/auth';
+import { redirect } from 'next/navigation';
 
 export default async function Settings() {
+  const session = await auth();
+  if (!session) return redirect('/');
   return (
     <>
       <Navbar />

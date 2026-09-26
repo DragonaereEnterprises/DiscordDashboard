@@ -1,7 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { fetchGuilds } from '@/utils/fetchGuilds';
-import Link from 'next/link';
 import PopupWrapper from '@/components/PopupWrapper';
 import { auth } from '@/utils/auth';
 import { redirect } from 'next/navigation';

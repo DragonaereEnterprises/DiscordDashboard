@@ -20,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <script defer src="/u/script.js" data-website-id="7184a2a4-7a85-452b-9b8a-06926934eb3f" data-host-url="/u"></script>
       </head>
       <body>
         <AppRouterCacheProvider>
