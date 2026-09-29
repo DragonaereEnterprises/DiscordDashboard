@@ -5,6 +5,7 @@ import PopupWrapper from '@/components/PopupWrapper';
 import { auth } from '@/utils/auth';
 import { redirect } from 'next/navigation';
 import ServerSelectorPage from '@/components/ServerSelectorPage';
+import Link from 'next/link';
 
 export default async function Servers(props: any) {
   const searchParams = await props.searchParams;
@@ -96,16 +97,21 @@ export default async function Servers(props: any) {
             redirectPath={error === 'Bot Offline' ? '/' : undefined}
           />
         )}
+        <div className="backButton">
+          <Link href="/servers">
+            <p>Back</p>
+          </Link>
+        </div>
         <main className="main">
           <div className="content">
             <div className="mainbody">
               <h2>Server Details</h2>
-              <p>Now showing details for server ID: {serverId}</p>
+              <p>Now showing details for <b>{guild?.name}</b></p>
               <div className="server-details">
                 <div className="server-image">
                   <img width="128px" height="128px" src={`https://cdn.discordapp.com/icons/${guild?.id}/${guild?.icon}.png`} alt={guild?.icon} />
                 </div>
-                <p>{guild?.name}</p>
+                <p><em>{guild?.id}</em></p>
               </div>
             </div>
           </div>

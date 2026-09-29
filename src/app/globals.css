@@ -89,6 +89,12 @@ body.popup-active .navbar {
   text-wrap: wrap;
 }
 
+.backButton {
+  position: absolute;
+  padding-top: 64px;
+  margin-left: 16px;
+}
+
 .grayscale {
   filter: grayscale(100%);
 }
